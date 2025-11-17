@@ -1,28 +1,24 @@
 #include "rclcpp/rclcpp.hpp"
-#include "std_msgs/msg/int32.hpp"
+#include "std_msgs/msg/string.hpp"
+#include "rclcpp/time_source.hpp"
 #include <memory>
 #include <chrono>
-
-using namespace std::chrono_literals;
-
 int main(int argc, char * argv[])
 {
-    rclcpp::init(argc, argv);
-    auto node = std::make_shared<rclcpp::Node>("node_pub1_2");
+rclcpp::init(argc, argv);
+    auto node = std::make_shared<rclcpp::Node>("node_pub1");
     auto qos_profile = rclcpp::QoS(rclcpp::KeepLast(10));
-    auto mypub = node->create_publisher<std_msgs::msg::Int32>("topic_pub1_2", qos_profile);
-    
-    int count = 0;
-    
-    auto timer_callback = [node, mypub, &count]() {
-        std_msgs::msg::Int32 message;
-        message.data = count++;
-        RCLCPP_INFO(node->get_logger(), "Publish: %d", message.data);
-        mypub->publish(message);
-    };
-    
-    auto timer = node->create_wall_timer(50ms, timer_callback);
-    rclcpp::spin(node);
+    auto mypub = node->create_publisher<std_msgs::msg::String>("topic_pub1", qos_profile );
+    std_msgs::msg::String message;
+    message.data = "Hello world!";
+    rclcpp::WallRate loop_rate(500.0);
+    while(rclcpp::ok())
+{
+    RCLCPP_INFO(node->get_logger(), "Publish: %s",
+    message.data.c_str());
+    mypub->publish(message);
+    loop_rate.sleep();
+}
     rclcpp::shutdown();
     return 0;
 }

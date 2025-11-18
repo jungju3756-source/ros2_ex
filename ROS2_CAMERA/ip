@@ -1,0 +1,35 @@
+window:
+무선 LAN 어댑터 Wi-Fi:
+
+   연결별 DNS 접미사. . . . :
+   링크-로컬 IPv6 주소 . . . . : fe80::5093:237b:4eb8:d765%22
+   IPv4 주소 . . . . . . . . . : 192.168.0.23
+   서브넷 마스크 . . . . . . . : 255.255.255.0
+   기본 게이트웨이 . . . . . . : 192.168.0.1
+
+wsl2-ubuntu:
+linux@DESKTOP-6GDCOL6:~$ ifconfig
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.0.23  netmask 255.255.255.0  broadcast 192.168.0.255
+        inet6 fe80::5093:237b:4eb8:d765  prefixlen 64  scopeid 0x20<link>
+        ether b0:38:6c:f2:6e:6d  txqueuelen 1000  (Ethernet)
+        RX packets 3747  bytes 1491055 (1.4 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 400  bytes 35973 (35.9 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+jetson:
+wlan0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.0.136  netmask 255.255.255.0  broadcast 192.168.0.255
+        inet6 fe80::ace:789a:7628:f2b0  prefixlen 64  scopeid 0x20<link>
+        ether 20:0d:b0:48:76:0b  txqueuelen 1000  (Ethernet)
+        RX packets 14932  bytes 7138802 (7.1 MB)
+        RX errors 0  dropped 72  overruns 0  frame 0
+        TX packets 2498  bytes 353954 (353.9 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+Jetson nano 에서 환경변수 ROS_DOMAIN_ID:
+jetson@nano:~$ echo $ROS_DOMAIN_ID
+6
+wsl2-ubuntu 에서 환경변수 ROS_DOMAIN_ID:
+linux@DESKTOP-6GDCOL6:~$  echo $ROS_DOMAIN_ID
+6

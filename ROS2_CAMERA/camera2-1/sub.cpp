@@ -19,15 +19,15 @@ int main(int argc, char * argv[]) {
 
     auto sub_raw = node->create_subscription<sensor_msgs::msg::CompressedImage>(
         "image_raw", qos_profile,
-        [node](const sensor_msgs::msg::CompressedImage::SharedPtr msg) { image_callback(msg, "원본영상"); });
+        [node](const sensor_msgs::msg::CompressedImage::SharedPtr msg) { image_callback(msg, "image_raw"); });
 
     auto sub_gray = node->create_subscription<sensor_msgs::msg::CompressedImage>(
         "image_gray", qos_profile,
-        [node](const sensor_msgs::msg::CompressedImage::SharedPtr msg) { image_callback(msg, "그레이영상"); });
+        [node](const sensor_msgs::msg::CompressedImage::SharedPtr msg) { image_callback(msg, "image_gray"); });
 
     auto sub_edge = node->create_subscription<sensor_msgs::msg::CompressedImage>(
         "image_edge", qos_profile,
-        [node](const sensor_msgs::msg::CompressedImage::SharedPtr msg) { image_callback(msg, "에지영상"); });
+        [node](const sensor_msgs::msg::CompressedImage::SharedPtr msg) { image_callback(msg, "image_edge"); });
 
     rclcpp::spin(node);
     rclcpp::shutdown();
